@@ -17,7 +17,7 @@ function Timer() {
   const [timerFinished, setTimerFinished] = useState(false);  
 
   const onTimerComplete = () => {
-    console.log('timer finished');
+
     if (qty < 1) {
       setMode('break');
     }
