@@ -1,0 +1,26 @@
+.timer-display 
+{
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+}
+
+.color-work 
+{
+    color: #f93831;
+}
+
+.color-rest
+{
+    color: #4aec8c;
+}
+
+.time
+{
+    font-size: 4rem;    
+}
+
+.dots
+{
+    font-size: 3rem;
+}

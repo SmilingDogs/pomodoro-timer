@@ -1,40 +1,43 @@
-import ReactSlider from 'react-slider';
-import '../styles/slider.css';
-import {useContext} from "react";
-import BackButton from './BackButton';
-import { SettingsContext } from '../context/SettingsProvider';
+import ReactSlider from "react-slider";
+import "../styles/slider.css";
+import { useContext } from "react";
+import BackButton from "./BackButton";
+import { SettingsContext } from "../context/SettingsProvider";
 
+const Settings = () => {
+  const {
+    workMinutes,
+    setWorkMinutes,
+    breakMinutes,
+    setBreakMinutes,
+    setShowSettings,
+  } = useContext(SettingsContext);
 
-function Settings() {
-
-  const settingsInfo = useContext(SettingsContext);
-
-  return(
-    <div style={{textAlign:'left'}}>
-      <label>Work minutes: {settingsInfo.workMinutes}</label>
+  return (
+    <div className="slider-wrapper">
+      <label>Work, mins: {workMinutes}</label>
       <ReactSlider
-        className={'slider'}
-        thumbClassName={'thumb'}
-        trackClassName={'track'}
-        value={settingsInfo.workMinutes}
-        onChange={newValue => settingsInfo.setWorkMinutes(newValue)}
+        className={"slider"}
+        thumbClassName={"thumb"}
+        trackClassName={"track"}
+        value={workMinutes}
+        onChange={(newValue) => setWorkMinutes(newValue)}
         min={1}
         max={120}
       />
-      <label>Break minutes: {settingsInfo.breakMinutes}</label>
+      <label>Break, mins: {breakMinutes}</label>
       <ReactSlider
-        className={'slider green'}
-        thumbClassName={'thumb'}
-        trackClassName={'track'}
-        value={settingsInfo.breakMinutes}
-        onChange={newValue => settingsInfo.setBreakMinutes(newValue)}
+        className={"slider green"}
+        thumbClassName={"thumb"}
+        trackClassName={"track"}
+        value={breakMinutes}
+        onChange={(newValue) => setBreakMinutes(newValue)}
         min={1}
         max={120}
       />
-      <div style={{textAlign:'center', marginTop:'20px'}}>
-        <BackButton onClick={() => settingsInfo.setShowSettings(false)} />
+      <div className="back-button-container">
+        <BackButton onClick={() => setShowSettings(false)} />
       </div>
-
     </div>
   );
 }

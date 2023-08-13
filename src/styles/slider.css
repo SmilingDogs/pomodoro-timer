@@ -1,8 +1,14 @@
+.slider-wrapper 
+{
+    text-align: left; 
+}
+
 .slider
 {
     height: 40px;
     border: 2px solid var(--red);
     border-radius: 20px;
+    width: 260px;
 }
 
 .thumb
@@ -22,4 +28,10 @@
 .slider.green .thumb
 {
     background-color: var(--green);
+}
+
+.back-button-container
+{
+    text-align: center;
+    margin-top: 40px;
 }

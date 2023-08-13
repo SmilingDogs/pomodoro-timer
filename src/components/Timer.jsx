@@ -1,56 +1,62 @@
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
-import PlayButton from "./PlayButton";
-import PauseButton from "./PauseButton";
 import SettingsButton from "./SettingsButton";
 import { useContext, useState} from "react";
 import { SettingsContext } from "../context/SettingsProvider";
-import ResetButton from "./ResetButton";
-
+import Title from "./Title";
+import Controls from "./Controls";
+import mySound1 from '../assets/beep-08b.mp3';
+import mySound2 from '../assets/beep-07a.mp3';
+import '../styles/timer.css';
+const sound2 = new Audio(mySound2);
+const sound1 = new Audio(mySound1);
 const red = '#f93831';
 const green = '#4aec8c';
 
 const Timer = () => {
   const { workMinutes, breakMinutes, setShowSettings, startTimer, setStartTimer} = useContext(SettingsContext);
+  
+  const [key, setKey] = useState(0);
 
-  const [qty, setQty] = useState(0); 
-  const [mode, setMode] = useState('work');
-  const [timerFinished, setTimerFinished] = useState(false);  
+  let isWork = key === 0;
 
   const onTimerComplete = () => {
-    if (qty < 1) {
-      setMode('break');
-    }
-    setQty((prev) => prev + 1);
-    if (qty == 1) {
-      setStartTimer(false);
-      setTimerFinished(true);
-    }
+    isWork ? setKey(prevKey => prevKey + 1) : setKey(prevKey => prevKey - 1);
   };
 
-  let isWork = mode === 'work';
+  const handleSettingsClick = () => {
+    setShowSettings(true);
+    setStartTimer(false);
+  }
 
   const renderTime = ({ remainingTime }) => {
+    
     let minutes = Math.floor(remainingTime / 60);
     let seconds = remainingTime % 60;
     if (seconds < 10 ) {
       seconds = '0' + seconds;
     }
+    if (remainingTime < 2.1) {
+      sound2.play();
+    }
+    if (remainingTime === 0) {
+      sound1.play();
+    }
 
     return (
-      <div style={{display: 'flex', alignItems: 'center', color: `${isWork ? red : green}`}}>
-        <span style={{ fontSize: "4rem", fontWeight: "bold" }}>{minutes}</span>
-        <span style={{ fontSize: "3rem", fontWeight: "bold" }}>:</span>
-        <span style={{ fontSize: "4rem", fontWeight: "bold" }}>{seconds}</span>
+      <div className={`timer-display ${isWork ? 'color-work' : 'color-rest'}`}>
+        <span className="time">{minutes}</span>
+        <span className="dots">:</span>
+        <span className="time">{seconds}</span>
       </div>
     );
   };
 
   return (
     <div className='timer-wrapper'>
-      <h2 className={isWork ? '' : 'rest'}>{isWork ? 'Work' : 'Rest'} </h2>
+      <Title isWork={isWork} />
 
       <CountdownCircleTimer
-        key={isWork ? 1 : 2}
+        key={key}
         isPlaying={startTimer}
         duration={(isWork ? workMinutes : breakMinutes) * 60}
         colors={isWork ? red : green}
@@ -61,14 +67,10 @@ const Timer = () => {
       >
         {renderTime}
       </CountdownCircleTimer>
-      <div style={{ marginTop: '30px' }}>
-        {!startTimer && !timerFinished && <PlayButton onClick={() => setStartTimer(true)} />}
-        {startTimer && !timerFinished && <PauseButton onClick={() => setStartTimer(false)} />}
-        {!startTimer && timerFinished && <ResetButton onClick={() => window.location.reload()} />}
-      </div>
-      <div style={{ marginTop: '20px' }}>
-        <SettingsButton onClick={() => setShowSettings(true)} />
-      </div>
+
+      <Controls setKey={setKey} keyProp={key} />
+
+      <SettingsButton onClick={handleSettingsClick} />
     </div>
   );
 }
