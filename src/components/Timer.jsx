@@ -29,8 +29,16 @@ const Timer = () => {
   }
 
   const renderTime = ({ remainingTime }) => {
-    
+    let hours = Math.floor(remainingTime / 3600)
     let minutes = Math.floor(remainingTime / 60);
+    console.log(hours);
+    console.log(minutes);
+    if (hours > 0) {
+      minutes = minutes - (hours * 60);
+    }
+    if (minutes < 10 ) {
+      minutes = '0' + minutes;
+    }
     let seconds = remainingTime % 60;
     if (seconds < 10 ) {
       seconds = '0' + seconds;
@@ -44,6 +52,8 @@ const Timer = () => {
 
     return (
       <div className={`timer-display ${isWork ? 'color-work' : 'color-rest'}`}>
+        {hours > 0 && <span className="time">{hours}</span> }
+        {hours > 0 && <span className="dots">:</span> }
         <span className="time">{minutes}</span>
         <span className="dots">:</span>
         <span className="time">{seconds}</span>
@@ -62,7 +72,7 @@ const Timer = () => {
         colors={isWork ? red : green}
         strokeWidth={6}
         trailColor='#151932'
-        size={220}
+        size={260}
         onComplete={onTimerComplete}
       >
         {renderTime}
