@@ -1,4 +1,5 @@
-import React, { useContext } from 'react'
+import { useContext } from 'react';
+import PropTypes from 'prop-types';
 import PlayButton from "./PlayButton";
 import PauseButton from "./PauseButton";
 import ResetButton from "./ResetButton";
@@ -18,3 +19,8 @@ const Controls = ({setKey, keyProp}) => {
 }
 
 export default Controls
+
+Controls.propTypes = {
+  setKey: PropTypes.func.isRequired,
+  keyProp: PropTypes.number.isRequired
+}

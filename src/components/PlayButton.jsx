@@ -7,5 +7,5 @@ const PlayButton = (props) => {
       </button>
     );
   }
-  
+
   export default PlayButton;

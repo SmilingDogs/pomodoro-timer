@@ -14,7 +14,7 @@ const green = '#4aec8c';
 
 const Timer = () => {
   const { workMinutes, breakMinutes, setShowSettings, startTimer, setStartTimer} = useContext(SettingsContext);
-  
+
   const [key, setKey] = useState(0);
 
   let isWork = key === 0;
@@ -31,8 +31,7 @@ const Timer = () => {
   const renderTime = ({ remainingTime }) => {
     let hours = Math.floor(remainingTime / 3600)
     let minutes = Math.floor(remainingTime / 60);
-    console.log(hours);
-    console.log(minutes);
+
     if (hours > 0) {
       minutes = minutes - (hours * 60);
     }

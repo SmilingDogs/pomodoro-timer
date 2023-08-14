@@ -7,5 +7,5 @@ const ResetButton = (props) => {
       </button>
     );
   }
-  
+
   export default ResetButton;

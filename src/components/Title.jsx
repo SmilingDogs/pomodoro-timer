@@ -1,4 +1,4 @@
-import React from 'react'
+import PropTypes from 'prop-types';
 
 const Title = ({isWork}) => {
   return (
@@ -7,3 +7,7 @@ const Title = ({isWork}) => {
 }
 
 export default Title
+
+Title.propTypes = {
+  isWork: PropTypes.bool.isRequired
+}

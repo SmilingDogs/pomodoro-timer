@@ -1,4 +1,5 @@
 import { useState } from "react";
+import PropTypes from 'prop-types';
 import { createContext } from "react";
 
 export const SettingsContext = createContext({});
@@ -28,3 +29,7 @@ const SettingsProvider = ({ children }) => {
 };
 
 export default SettingsProvider;
+
+SettingsProvider.propTypes = {
+  children: PropTypes.element
+}

@@ -7,5 +7,5 @@ const PauseButton = (props) => {
       </button>
     );
   }
-  
+
   export default PauseButton;
