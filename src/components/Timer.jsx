@@ -12,6 +12,10 @@ const sound1 = new Audio(mySound1);
 const red = '#f93831';
 const green = '#4aec8c';
 
+function doMinutesHaveOne(mins) {
+  return mins.toString().split('').includes('1');
+}
+
 const Timer = () => {
   const { workMinutes, breakMinutes, setShowSettings, startTimer, setStartTimer} = useContext(SettingsContext);
 
@@ -53,7 +57,7 @@ const Timer = () => {
       <div className={`timer-display ${isWork ? 'color-work' : 'color-rest'}`}>
         {hours > 0 && <span className={`time-hours ${hours === 1 ? 'one-hour' : ''}`}>{hours}</span> }
         {hours > 0 && <span className="dots">:</span> }
-        <span className="time">{minutes}</span>
+        <span className={`time ${doMinutesHaveOne(minutes) ? 'with-one' : ''}`}>{minutes}</span>
         <span className="dots">:</span>
         <span className="time">{seconds}</span>
       </div>
