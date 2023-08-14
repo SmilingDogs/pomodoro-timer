@@ -1,11 +1,11 @@
-.timer-display 
+.timer-display
 {
     display: flex;
     align-items: center;
-    font-weight: bold;
+    justify-content: center;
 }
 
-.color-work 
+.color-work
 {
     color: #f93831;
 }
@@ -17,7 +17,19 @@
 
 .time
 {
-    font-size: 4rem;    
+    font-size: 4rem;
+    width: 80px;
+}
+
+.time-hours
+{
+    width: 40px;
+    font-size: 4rem;
+}
+
+.one-hour {
+    position: relative;
+    left: 18px;
 }
 
 .dots

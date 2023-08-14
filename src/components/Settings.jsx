@@ -23,7 +23,7 @@ const Settings = () => {
         value={workMinutes}
         onChange={(newValue) => setWorkMinutes(newValue)}
         min={1}
-        max={120}
+        max={300}
       />
       <label>Break, mins: {breakMinutes}</label>
       <ReactSlider

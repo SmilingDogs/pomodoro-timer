@@ -51,7 +51,7 @@ const Timer = () => {
 
     return (
       <div className={`timer-display ${isWork ? 'color-work' : 'color-rest'}`}>
-        {hours > 0 && <span className="time">{hours}</span> }
+        {hours > 0 && <span className={`time-hours ${hours === 1 ? 'one-hour' : ''}`}>{hours}</span> }
         {hours > 0 && <span className="dots">:</span> }
         <span className="time">{minutes}</span>
         <span className="dots">:</span>
